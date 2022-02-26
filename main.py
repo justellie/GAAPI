@@ -13,11 +13,6 @@ from fastapi import UploadFile, File
 #Pandas
 import pandas as pd
 
-
-
-
-
-
 app= FastAPI()
 
 @app.post(
@@ -28,8 +23,8 @@ def post_image(
     price: UploadFile = File(...),
     group: UploadFile = File(...)
 ):
-    price_df=read_file_csv(price)
-    group_df=read_file_csv(group)
+    price_df = read_file_csv(price)
+    group_df = read_file_csv(group)
 
     js=process_data(price_df,group_df)
 
@@ -45,14 +40,14 @@ def drop_useless_columns(df):
 
     #In case of whitespace
     df1 = df1.rename(columns=lambda x: x.strip())
-    df1=df1.applymap(lambda x: x.strip() if isinstance(x, str) else x)
+    df1 = df1.applymap(lambda x: x.strip() if isinstance(x, str) else x)
 
     return df1
 
 def prepare_prices(df):
     df["Date"] = pd.to_datetime(df['Date'])
     df["Date"] = df["Date"].dt.strftime("%y-%m-%d")
-    df=df.set_index('Date')
+    df = df.set_index('Date')
     return df
 
 def process_data(price_df,group_df):
@@ -65,7 +60,7 @@ def process_data(price_df,group_df):
     df1 = prepare_prices(df1)
 
     #Calculate mean 
-    df1=df1.groupby('Date').mean()
+    df1 = df1.groupby('Date').mean()
 
     # I do this to join with groups 
     df1Transpose = df1.T
