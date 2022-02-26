@@ -14,11 +14,11 @@ This project was part of interview process and also my first experience using Fa
 
 The endpoint receive two .csv files the first one is a $$m*n$$ matrix where $$n$$ is the number of dates and m number of assets and the value it's a float which describe the price of that asset 
 
-![](/home/elio/pruebaBita/images/prices.png)
+![](./images/prices.png)
 
 and the second is the group matrix, these groups will come in a key/value format, where the key will be the asset and the value the group to which it belongs. 
 
-![](/home/elio/pruebaBita/images/groups.png)
+![](./images/groups.png)
 
 # Install and Run
 
@@ -64,11 +64,11 @@ and the second is the group matrix, these groups will come in a key/value format
 
 6. Got to http://127.0.0.1:8000/docs 
 
-   ![](/home/elio/pruebaBita/images/browser.png)
+   ![](.//images/browser.png)
 
    
 
-7. ![](/home/elio/pruebaBita/images/exemple.gif)
+7. ![](./images/exemple.gif)
 
    
 
