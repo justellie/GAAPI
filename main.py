@@ -46,7 +46,7 @@ def drop_useless_columns(df):
 
 def prepare_prices(df):
     df["Date"] = pd.to_datetime(df['Date'])
-    df["Date"] = df["Date"].dt.strftime("%y-%m-%d")
+    df["Date"] = df["Date"].dt.strftime("%Y-%m-%d")
     df = df.set_index('Date')
     return df
 
