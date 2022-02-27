@@ -50,26 +50,26 @@ def prepare_prices(df):
     df = df.set_index('Date')
     return df
 
-def process_data(price_df,group_df):
+def process_data(price_df_raw,group_df_raw):
 
     #Drops useless columns and rows
-    df1 = drop_useless_columns(price_df)
-    df2 = drop_useless_columns(group_df)
+    price_df = drop_useless_columns(price_df_raw)
+    group_df = drop_useless_columns(group_df_raw)
 
     #Fomarting and setting date as index
-    df1 = prepare_prices(df1)
+    price_df = prepare_prices(price_df)
 
     #Calculate mean 
-    df1 = df1.groupby('Date').mean()
+    price_df = price_df.groupby('Date').mean()
 
     # I do this to join with groups 
-    df1Transpose = df1.T
-    df1Transpose["instrument"] = df1Transpose.index
-    merge = pd.merge(df1Transpose, df2, how = 'inner', on = 'instrument')
+    price_df = price_df.T
+    price_df["instrument"] = price_df.index
+    merge = pd.merge(price_df, group_df, how = 'inner', on = 'instrument')
 
     # pivot the table to get the format that i want
-    result = pd.pivot_table(data = merge, index = ['group'])
-    js = result.to_json(orient = 'index')
+    merge = pd.pivot_table(data = merge, index = ['group'])
+    js = merge.to_json(orient = 'index')
     parsed = json.loads(js)
 
     return parsed
