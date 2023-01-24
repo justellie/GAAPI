@@ -19,16 +19,16 @@ app= FastAPI()
     path="/upload-file",
     status_code=status.HTTP_200_OK
 )
-def post_image(
+def upload_filew(
     price: UploadFile = File(...),
     group: UploadFile = File(...)
 ):
     price_df = read_file_csv(price)
     group_df = read_file_csv(group)
 
-    js=process_data(price_df,group_df)
+    data=process_data(price_df,group_df)
 
-    return js 
+    return data 
 
 def read_file_csv(file_csv):
     df = pd.read_csv(StringIO(str(file_csv.file.read(), 'utf-8')), encoding='utf-8',delimiter=",")
